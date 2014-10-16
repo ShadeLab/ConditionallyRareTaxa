@@ -1,3 +1,7 @@
+#####
+#16 Oct 2014 bug fix.  ALS.  MaxRel filter was updated.  Also added option:  can discover of CRT based on MaxRel calculated from dataset with all OTUs OR dataset with only non-singleton OTUs.
+####
+
 #function to make relative abundance table - load into workspace
 makeRFtable.f=function(data){
   cSum1<-colSums(data)
@@ -20,7 +24,7 @@ makeRFtable.f=function(data){
 
 
 #Rare to Prevalent OTUs
-SimpleRareToPrev.f=function(otu_fp,map_fp,abund_thresh = 0.005, b_thresh = 0.90, rdp_lastcol=TRUE){
+SimpleRareToPrev.f=function(otu_fp,abund_thresh = 0.005, abund_thresh_ALL=TRUE,b_thresh = 0.90, rdp_lastcol=TRUE){
   
   #Read in files
   otu=read.table(otu_fp, header=TRUE, check.names=FALSE, row.names=1, sep="\t")
@@ -72,29 +76,38 @@ SimpleRareToPrev.f=function(otu_fp,map_fp,abund_thresh = 0.005, b_thresh = 0.90,
       b=(1+(s^2))/(k+3)
       
       #determine whether OTU max and median relative abundance (based on full dataset, otu.rel)
-      x2=as.numeric(otu.rel2[j,])
-      mx.rel=max(x2)
-      med.rel=median(x2)
+      x2=as.numeric(otu.rel[j,])
+      mx.rel.all=max(x2)
+      med.rel.all=median(x2)
       
-      out=rbind(out,c(row.names(otu.nosigs)[j],b,mx.rel, med.rel))
+      x3=as.numeric(otu.rel2[j,])
+      mx.rel.ns=max(x3)
+      med.rel.ns=median(x3)
+      
+      out=rbind(out,c(row.names(otu.nosigs)[j],b,mx.rel.all, med.rel.all, mx.rel.ns, med.rel.ns))
     }
     
     #print(dim(out))
     #print(head(out))
     out=as.data.frame(out)
-    colnames(out)=c("OTUID","CoefficientOfBimodality","MaxRel", "MedianRel")
+    colnames(out)=c("OTUID","CoefficientOfBimodality","MaxRel_All", "MedianRel_All", "MaxRel_NoSingletons", "MedianRel_NoSingletons")
     
     if(rdp_lastcol==TRUE){
     out=cbind(out, rdp3)
     colnames(out)[5]="TaxonomicAssignment"
     }
     
-    #Filter 1: for at least one rel. abundance greater than abund_thresh (default = 0.005)
-    out.filter=out[as.vector(out[,"MaxRel"]) >= abund_thresh,]
+    #Filter 1: for at least one rel. abundance greater than abund_thresh (default = 0.005).  The default uses the whole dataset MaxRel (abund_thresh_ALL=TRUE), another option is the singleton-removed dataset.
+    if(abund_thresh_ALL==TRUE){
+    out.filter=out[as.numeric(as.vector(out[,"MaxRel_All"])) >= abund_thresh,]
     print(dim(out.filter))
+      }else{
+    out.filter=out[as.numeric(as.vector(out[,"MaxRel_NoSingletons"])) >= abund_thresh,]
+    print(dim(out.filter))
+      }
       
     #Filter 2: for coefficient of bimodality greater than b_thresh (default = 0.90)
-    out.filter=out.filter[as.vector(out.filter[,"CoefficientOfBimodality"]) >= b_thresh,]
+    out.filter=out.filter[as.numeric(as.vector(out.filter[,"CoefficientOfBimodality"])) >= b_thresh,]
     print(dim(out.filter))
     
   write.table(out.filter, paste("ResultsFile_ConditionallyRareOTUID_", abund_thresh, "_", b_thresh, ".txt", sep=""), quote=FALSE, sep="\t", row.names=FALSE)

@@ -3,6 +3,9 @@
 #This script comes with no warranty.
 #Questions?  shade.ashley@gmail.com
 
+#####
+#16 Oct 2014 bug fix.  ALS.  MaxRel filter was updated.  Also added option:  can discover of CRT based on MaxRel calculated from dataset with all OTUs OR dataset with only non-singleton OTUs.
+####
 
 #####
 #What does the script do?
@@ -30,17 +33,18 @@ library(TSA)
 
 #Step 3.
 #Load the necessary functions into your R workspace, contained in a separate file, "CRT_functions.R" 
-source("CRT_Functions.R")
+source("CRT_Functions_v0.1.R")
 
 #Step 4.  
 #Change the options below to match your dataset.  The options are:  
 #otu_fp - type the the full name of your dataset file, including the extension
-#abund_thresh -  Change the maximum abundance threshold, if desired. Defaults to 0.005 
+#abund_thresh -  Change the maximum abundance threshold, if desired. Defaults to 0.005
+#abund_thresh_ALL - Use TRUE if you want to use the full dataset (ALL OTUs) to calculate relative abundances.  Use FALSE if you want to use the non-singleton (filtered) dataset to calculate relative abundances.  Default is TRUE.
 #b_thresh - Change the coefficient of bimodality threshold, if desired.  Defaults to 0.90
 #rdp_lastcol - Use TRUE if the last column of the dataset contains the taxonomic assignments of OTUs, use FALSE if not
 #Then,to run the script, copy and paste the command into the R console:
 
-SimpleRareToPrev.f(otu_fp="InputFile_EnglishChannel_L4.txt",abund_thresh=0.005, b_thresh=0.90, rdp_lastcol=TRUE)
+SimpleRareToPrev.f(otu_fp="InputFile_EnglishChannel_L4.txt",abund_thresh=0.005, abund_thresh_ALL=TRUE,b_thresh=0.90, rdp_lastcol=TRUE)
 
 #When the script is finished running, a new results file will appear in the directory, and the output will also appear in the R console.
 
