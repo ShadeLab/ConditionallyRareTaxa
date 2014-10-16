@@ -24,7 +24,7 @@ makeRFtable.f=function(data){
 
 
 #Rare to Prevalent OTUs
-SimpleRareToPrev.f=function(otu_fp,abund_thresh = 0.005, abund_thresh_ALL=TRUE,b_thresh = 0.90, rdp_lastcol=TRUE){
+SimpleRareToPrev.f=function(otu_fp,abund_thresh = 0.005, abund_thresh_ALL=FALSE,b_thresh = 0.90, rdp_lastcol=TRUE){
   
   #Read in files
   otu=read.table(otu_fp, header=TRUE, check.names=FALSE, row.names=1, sep="\t")
@@ -94,14 +94,16 @@ SimpleRareToPrev.f=function(otu_fp,abund_thresh = 0.005, abund_thresh_ALL=TRUE,b
     
     if(rdp_lastcol==TRUE){
     out=cbind(out, rdp3)
-    colnames(out)[5]="TaxonomicAssignment"
+    colnames(out)[7]="TaxonomicAssignment"
     }
     
     #Filter 1: for at least one rel. abundance greater than abund_thresh (default = 0.005).  The default uses the whole dataset MaxRel (abund_thresh_ALL=TRUE), another option is the singleton-removed dataset.
     if(abund_thresh_ALL==TRUE){
+    at="ALL"
     out.filter=out[as.numeric(as.vector(out[,"MaxRel_All"])) >= abund_thresh,]
     print(dim(out.filter))
       }else{
+    at="NOSIG"
     out.filter=out[as.numeric(as.vector(out[,"MaxRel_NoSingletons"])) >= abund_thresh,]
     print(dim(out.filter))
       }
@@ -110,7 +112,7 @@ SimpleRareToPrev.f=function(otu_fp,abund_thresh = 0.005, abund_thresh_ALL=TRUE,b
     out.filter=out.filter[as.numeric(as.vector(out.filter[,"CoefficientOfBimodality"])) >= b_thresh,]
     print(dim(out.filter))
     
-  write.table(out.filter, paste("ResultsFile_ConditionallyRareOTUID_", abund_thresh, "_", b_thresh, ".txt", sep=""), quote=FALSE, sep="\t", row.names=FALSE)
+  write.table(out.filter, paste("ResultsFile_ConditionallyRareOTUID_", abund_thresh, "_", b_thresh, "_", at, ".txt", sep=""), quote=FALSE, sep="\t", row.names=FALSE)
  
     
   print("No. conditionally rare OTUs")
