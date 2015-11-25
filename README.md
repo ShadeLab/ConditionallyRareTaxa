@@ -9,7 +9,7 @@ R scripts and tutorial datasets to detect conditionally rare taxa in time series
 #####
 # This repository includes:
 1.  <b>CRT_Functions_vX.R</b>   
-   * An R script that contains all of the functions needed for the analysis.  The user does not need to open or manipulate anything in this script.
+   * An R script that contains all of the functions needed for the analysis.  The user does not need to open or manipulate anything in this script.  For analysis, it should be located in the same directory as the SimpleRareToPrevScript_vX.R file and the input file.
 2.  <b>SimpleRareToPrevScript_vX.R</b>   
    * An R script with lines that must be run in R to complete the analysis.  This script includes user-defined options, and should be opened,  and options altered for individual analysis needs.  Please read the comments embedded in SimpleRareToPrevScript_vX.R because they contain important instructions for successful use.
 3.  <b>InputFile_EnglishChannel_L4.txt</b>    
