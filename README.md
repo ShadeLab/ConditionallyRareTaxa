@@ -1,7 +1,30 @@
-ConditionallyRareTaxa
-=====================
+# Github Repository for
+# Conditionally Rare Taxa Disproportionately Contribute to Temporal Changes in Microbial Diversity
+## By Ashley Shade, Stuart E. Jones, J. Gregory Caporaso, Jo Handelsman, Rob Knight, Noah Fierer, Jack A. Gilbert
 
-R scripts and tutorial datasets to detect conditionally rare taxa in time series of microbial communities
+
+<i> This work is published </i>
+
+### Data
+The raw data for this meta-analyses were from previously published studies and are available as described therein.  Please see the materials and methods of the Shade et al. 2014 for details. 
+
+
+### To cite this work or code
+Shade A, Jones SE, Caporaso JG, Handelsman J, Knight R, Fierer N, Gilbert JA. Conditionally rare taxa disproportionately contribute to temporal changes in microbial diversity. MBio. 2014 Aug 29;5(4). 
+
+
+### Abstract
+
+ABSTRACT.  Microbial communities typically contain many rare taxa that make up the majority of the observed membership, yet the contribution of this microbial “rare biosphere” to community dynamics is unclear. Using 16S rRNA amplicon sequencing of 3,237 samples from 42 time series of microbial communities from nine different ecosystems (air; marine; lake; stream; adult human skin, tongue, and gut; infant gut; and brewery wastewater treatment), we introduce a new method to detect typically rare microbial taxa that occasionally become very abundant (conditionally rare taxa [CRT]) and then quantify their contributions to temporal shifts in community structure. We discovered that CRT made up 1.5 to 28% of the community membership, represented a broad diversity of bacterial and archaeal lineages, and explained large amounts of temporal community dissimilarity (i.e., up to 97% of Bray-Curtis dissimilarity). Most of the CRT were detected at multiple time points, though we also identified “one-hit wonder” CRT that were observed at only one time point. Using a case study from a temperate lake, we gained additional insights into the ecology of CRT by comparing routine community time series to large disturbance events. Our results reveal that many rare taxa contribute a greater amount to microbial community dynamics than is apparent from their low proportional abundances. This observation was true across a wide range of ecosystems, indicating that these rare taxa are essential for understanding community changes over time.
+
+IMPORTANCE. Microbial communities and their processes are the foundations of ecosystems. The ecological roles of rare microorganisms are largely unknown, but it is thought that they contribute to community stability by acting as a reservoir that can rapidly respond to environmental changes. We investigated the occurrence of typically rare taxa that very occasionally become more prominent in their communities (“conditionally rare”). We quantified conditionally rare taxa in time series from a wide variety of ecosystems and discovered that not only were conditionally rare taxa present in all of the examples, but they also contributed disproportionately to temporal changes in diversity when they were most abundant. This result indicates an important and general role for rare microbial taxa within their communities.
+
+
+### Funding
+A Gordon and Betty Moore Foundation postdoctoral fellowship from the Life Sciences Research Foundation supported A.S. This work was supported in part by the U.S. Department of Energy under contract DE-AC02-06CH11357 and by the Howard Hughes Medical Institute.
+
+### More Info
+[ShadeLab](http://ashley17061.wixsite.com/shadelab/home)  
 
  DOI for v1.0
  10.5281/zenodo.10040
